@@ -1,19 +1,17 @@
 package projeto_final_bloco_01.repository;
 
 import java.util.List;
-
 import projeto_final_bloco_01.Jogo;
 
 public interface ProdutoRepository {
 
-	List<Jogo> listarProdutos();
+    List<Jogo> listarProdutos();
 
-	Jogo buscarProdutoPorId(int id);
+    Jogo buscarProdutoPorId(int id);
 
-	void cadastrarProduto();
+    void cadastrarProduto(Jogo jogo);
 
-	void atualizarProduto(int id);
+    void atualizarProduto(int id, Jogo jogoAtualizado);
 
-	void deletarProduto(int id);
-
+    void deletarProduto(int id);
 }

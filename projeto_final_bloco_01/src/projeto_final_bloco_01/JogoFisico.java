@@ -19,8 +19,10 @@ public class JogoFisico extends Jogo {
 	
 	@Override
 	public void sobre() {
-		System.out.println("Jogo Físico: " + getNome() + " - Plataforma: " + getPlataforma() + " - Preço: R$"
-				+ getPreco() + " - Mídia: " + midia);
+	    System.out.println("Jogo Físico: ID " + getId() + " - " + getNome() +
+	                       " - Plataforma: " + getPlataforma() +
+	                       " - Preço: R$" + getPreco() +
+	                       " - Mídia: " + midia);
 	}
 
 }

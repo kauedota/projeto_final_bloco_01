@@ -6,6 +6,7 @@ public class JogoDigital extends Jogo {
 
 	public JogoDigital(int id, String nome, String plataforma, double preco, double tamanhoGB) {
 		super(id, nome, plataforma, preco);
+		this.tamanhoGB = tamanhoGB;
 	}
 	
 	public double getTamanhoGB() {
@@ -18,9 +19,11 @@ public class JogoDigital extends Jogo {
 
 	@Override
 	public void sobre() {
-		System.out.println(
-				"Jogo Digital: " + getNome() + " - Plataforma: " + getPlataforma() + " - Preço: R$" + getPreco() + " - Tamanho: " + tamanhoGB + "GB");
-
+	    System.out.println("Jogo Digital: ID " + getId() + " - " + getNome() +
+	                       " - Plataforma: " + getPlataforma() +
+	                       " - Preço: R$" + getPreco() +
+	                       " - Tamanho: " + getTamanhoGB() + "GB");
+	
 	}
 
 }

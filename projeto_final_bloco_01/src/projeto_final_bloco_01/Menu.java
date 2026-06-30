@@ -1,12 +1,14 @@
 package projeto_final_bloco_01;
 
 import java.util.Scanner;
+import projeto_final_bloco_01.controller.ProdutoController;
 
 public class Menu {
     
     public static void main(String[] args) {
         
         Scanner leia = new Scanner(System.in);
+        ProdutoController controller = new ProdutoController();
         int opcao;
      
         do {
@@ -25,34 +27,99 @@ public class Menu {
             opcao = leia.nextInt();
             
             switch (opcao) {
-                case 1:
-                    Jogo.listarJogos();
-                    break;
-                case 2:
-                    System.out.print("Digite o ID do jogo: ");
-                    int idBusca = leia.nextInt();
-                    Jogo.buscarJogoPorId(idBusca);
-                    break;
-                case 3:
-                    Jogo.cadastrarJogo();
-                    break;
-                case 4:
-                    System.out.print("Digite o ID do jogo a ser atualizado: ");
-                    int idAtualizar = leia.nextInt();
-                    Jogo.atualizarJogo(idAtualizar);
-                    break;
-                case 5:
-                    System.out.print("Digite o ID do jogo a ser deletado: ");
-                    int idDeletar = leia.nextInt();
-                    Jogo.deletarJogo(idDeletar);
-                    break;
-                case 0:
-                    System.out.println("Saindo do sistema...");
-                    break;
-                default:
-                    System.out.println("Opção inválida! Tente novamente.");
-            }
+            case 1:
+                for (Jogo jogo : controller.listarProdutos()) {
+                    jogo.sobre();
+                }
+                break;
+            case 2:
+                System.out.println("Digite o ID do jogo que deseja buscar: ");
+                int idBusca = leia.nextInt();
+                try {
+                    Jogo jogo = controller.buscarProdutoPorId(idBusca);
+                    jogo.sobre();
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            case 3:
+                System.out.println("Digite o tipo de jogo (1 - Físico, 2 - Digital): ");
+                int tipo = leia.nextInt();
+                System.out.println("Digite o ID do jogo: ");
+                int id = leia.nextInt();
+                leia.nextLine();
 
+                System.out.println("Digite o nome do jogo: ");
+                String nome = leia.nextLine();
+
+                System.out.println("Digite a plataforma do jogo: ");
+                String plataforma = leia.nextLine();
+
+                System.out.println("Digite o preço do jogo: ");
+                double preco = leia.nextDouble();
+
+                if (tipo == 1) {
+                    leia.nextLine();
+                    System.out.println("Digite a mídia do jogo: ");
+                    String midia = leia.nextLine();
+                    JogoFisico jogoFisico = new JogoFisico(id, nome, plataforma, preco, midia);
+                    controller.cadastrarProduto(jogoFisico);
+                } else if (tipo == 2) {
+                    System.out.println("Digite o tamanho em GB do jogo: ");
+                    double tamanhoGB = leia.nextDouble();
+                    JogoDigital jogoDigital = new JogoDigital(id, nome, plataforma, preco, tamanhoGB);
+                    controller.cadastrarProduto(jogoDigital);
+                } else {
+                    System.out.println("Tipo de jogo inválido!");
+                }
+                break;
+            case 4:
+                System.out.println("Digite o ID do jogo que deseja atualizar: ");
+                int idAtualizar = leia.nextInt();
+                leia.nextLine();
+
+                System.out.println("Digite o novo nome do jogo: ");
+                String novoNome = leia.nextLine();
+
+                System.out.println("Digite a nova plataforma do jogo: ");
+                String novaPlataforma = leia.nextLine();
+
+                System.out.println("Digite o novo preço do jogo: ");
+                double novoPreco = leia.nextDouble();
+
+                System.out.println("Digite o novo tipo de jogo (1 - Físico, 2 - Digital): ");
+                int tipoAtualizar = leia.nextInt();
+                leia.nextLine();
+
+                if (tipoAtualizar == 1) {
+                    System.out.println("Digite a nova mídia do jogo: ");
+                    String novaMidia = leia.nextLine();
+                    JogoFisico jogoFisicoAtualizado = new JogoFisico(idAtualizar, novoNome, novaPlataforma, novoPreco, novaMidia);
+                    controller.atualizarProduto(idAtualizar, jogoFisicoAtualizado);
+                } else if (tipoAtualizar == 2) {
+                    System.out.println("Digite o novo tamanho em GB do jogo: ");
+                    double novoTamanhoGB = leia.nextDouble();
+                    JogoDigital jogoDigitalAtualizado = new JogoDigital(idAtualizar, novoNome, novaPlataforma, novoPreco, novoTamanhoGB);
+                    controller.atualizarProduto(idAtualizar, jogoDigitalAtualizado);
+                } else {
+                    System.out.println("Tipo de jogo inválido!");
+                }
+                break;
+            case 5:
+                System.out.println("Digite o ID do jogo que deseja deletar: ");
+                int idDeletar = leia.nextInt();
+                try {
+                    controller.deletarProduto(idDeletar);
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            case 0:
+                System.out.println("Saindo do sistema...");
+                break;
+            default:
+                System.out.println("Opção inválida! Tente novamente.");
+            }
         } while (opcao != 0);
         
         leia.close();
