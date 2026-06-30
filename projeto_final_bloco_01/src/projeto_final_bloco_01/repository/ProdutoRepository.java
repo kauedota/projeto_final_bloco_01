@@ -1,7 +1,8 @@
 package projeto_final_bloco_01.repository;
 
 import java.util.List;
-import projeto_final_bloco_01.Jogo;
+
+import projeto_final_bloco_01.model.Jogo;
 
 public interface ProdutoRepository {
 

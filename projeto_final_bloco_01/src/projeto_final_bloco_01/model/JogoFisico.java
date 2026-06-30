@@ -1,4 +1,4 @@
-package projeto_final_bloco_01;
+package projeto_final_bloco_01.model;
 
 public class JogoFisico extends Jogo {
 	
