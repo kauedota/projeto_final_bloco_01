@@ -53,7 +53,7 @@ public class Menu {
                     System.out.println("Opção inválida! Tente novamente.");
             }
 
-        } while (opcao != 0); // <-- o while tem que ficar aqui, fora do switch!
+        } while (opcao != 0);
         
         leia.close();
     }
